@@ -27,11 +27,14 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          mkdir ../gh-pages-tmp
+          cp -r dist/* ../gh-pages-tmp/
           git fetch origin gh-pages || true
           git switch --orphan gh-pages
           git reset --hard
           rm -rf ./*
-          cp -r dist/* ./
+          cp -r ../gh-pages-tmp/* ./
+          rm -rf ../gh-pages-tmp
           git add .
           git commit -m "Deploy to gh-pages" || echo "Nothing to commit"
           git push --force origin gh-pages
