@@ -37,6 +37,6 @@ jobs:
           rm -rf ../gh-pages-tmp
           git add .
           git commit -m "Deploy to gh-pages" || echo "Nothing to commit"
-          git push --force origin gh-pages
+          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git" gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
